@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\client_logs",
+    "\\commands",
+    "\\configurations",
+    "\\modules",
+    "\\shard_errors",
+    "\\shard_logs"
+  ],
+  "SelectedNode": "\\modules\\shardlogs.js",
+  "PreviewInSolutionExplorer": false
+}
