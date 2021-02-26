@@ -1,0 +1,8 @@
+{
+  "Shards": {
+    "ShardIsReady": "Client shard is ready.",
+    "ShardError": "Client shard has thrown an error.",
+    "ShardReconnected": "Client shard is back.",
+    "ShardDisconnected": "Client shard closed with event."
+  }
+}

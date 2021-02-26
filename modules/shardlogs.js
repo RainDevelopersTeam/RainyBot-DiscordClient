@@ -1,12 +1,23 @@
-const shard_errorpath = "./shard_errors/";
-const shard_logspath = "./shard_logs/";
+const discord = require("discord.js");
+const colors = require("chalk");
+const filesys = require("fs");
 
-let currenttime = require("./modules/curenttime.js");
+const shard_errorpath = "../shard_errors/";
+const shard_logspath = "../shard_logs/";
+
+let currenttime = require("./currenttime.js");
+
+const config = require("../configurations/MainConfiguration.json");
+const settings = require("../configurations/ClientSettings.json");
 
 let shardready = function (shard) {
     console.log(`Client shard ${shard} is ready.`);
 
-    filesys.appendFile(`${shard_logspath}${currentsessiondate}.log`, config.shardready, function (error) {
+    let currentsessiondate = currenttime.getloggingtime;
+
+    let data = `[${currenttime.getloggingtime()}] ${config.Shards.ShardIsReady}\n`;
+
+    filesys.appendFile(`${shard_logspath}${currentsessiondate}.log`, data, function (error) {
         if (error) {
             console.log(`=========================`);
             console.log(error);
@@ -18,7 +29,9 @@ let shardready = function (shard) {
 let sharderror = function (err, shard) {
     console.log(`Client shard ${shard} has thrown an error ${err.name}.`);
 
-    filesys.writeFile(`${shard_errorpath}${currenttime.getloggingtime}.log`, config.sharderror, function (error) {
+    let data = `[${currenttime.getloggingtime()}] ${config.Shards.ShardError}\n`;
+
+    filesys.writeFile(`${shard_errorpath}${currenttime.getloggingtime}.log`, data, function (error) {
         if (error) {
             console.log(`=========================`);
             console.log(error);
@@ -30,7 +43,9 @@ let sharderror = function (err, shard) {
 let shardreconnect = function (shard) {
     console.log(`Client shard ${shard} is back.`);
 
-    filesys.appendFile(`${shard_logspath}${currenttime.getloggingtime}.log`, config.shardback, function (err) {
+    let data = `[${currenttime.getloggingtime()}] ${config.Shards.ShardReconnected}\n`;
+
+    filesys.appendFile(`${shard_logspath}${currenttime.getloggingtime}.log`, data, function (err) {
         if (error) {
             console.log(`=========================`);
             console.log(error);
@@ -42,9 +57,9 @@ let shardreconnect = function (shard) {
 let sharddisconnect = function (shard) {
     console.log(`Client shard ${shard} closed with ${event} event.`);
 
-    let currentsessiondate = currenttime.getloggingtime;
+    let data = `[${currenttime.getloggingtime()}] ${config.Shards.ShardDisconnected}\n`;
 
-    filesys.appendFile(`${shard_logspath}${currenttime.getloggingtime}.log`, config.shardback, function (err) {
+    filesys.appendFile(`${shard_logspath}${currenttime.getloggingtime}.log`, data, function (err) {
         if (error) {
             console.log(`=========================`);
             console.log(error);
