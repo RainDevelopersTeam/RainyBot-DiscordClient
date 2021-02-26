@@ -4,6 +4,7 @@ const filesys = require("fs");
 
 let currenttime = require("./modules/curenttime.js");
 let shardlogs = require("./modules/shardlogs.js");
+let clientlogs = require("./modules/clientlogs.js")
 
 const client = new discord.Client({
     fetchAllMembers: true,
@@ -28,7 +29,10 @@ let currentsessiondate = currenttime.getloggingtime;
 
 client.login(token);
 
-client.on("shardReady", function (shard) {});
-cilent.on("shardError", function (err, shard) {});
-client.on("shardReconnecting", function (shard) { });
+client.on("shardReady", function (shard) { shardlogs.shardready(shard); });
+cilent.on("shardError", function (err, shard) { shardlogs.shardready(err, shard); });
+client.on("shardReconnecting", function (shard) { shardlogs.shardready(shard); });
+client.on("shardDisconnect", function (event, shard) { shardlogs.shardready(event, shard); });
+
+client.once("ready", function () { clientlogs.readylogs(client); });
 

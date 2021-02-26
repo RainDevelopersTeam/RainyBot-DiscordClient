@@ -1,3 +1,8 @@
+const shard_errorpath = "./shard_errors/";
+const shard_logspath = "./shard_logs/";
+
+let currenttime = require("./modules/curenttime.js");
+
 let shardready = function (shard) {
     console.log(`Client shard ${shard} is ready.`);
 
@@ -34,6 +39,21 @@ let shardreconnect = function (shard) {
     }); 
 }
 
+let sharddisconnect = function (shard) {
+    console.log(`Client shard ${shard} closed with ${event} event.`);
+
+    let currentsessiondate = currenttime.getloggingtime;
+
+    filesys.appendFile(`${shard_logspath}${currenttime.getloggingtime}.log`, config.shardback, function (err) {
+        if (error) {
+            console.log(`=========================`);
+            console.log(error);
+            console.log("=========================")
+        }
+    });
+}
+
 module.exports.shardready = shardready;
 module.exports.sharderror = sharderror;
 module.exports.shardreconnect = shardreconnect;
+module.exports.sharddisconnect = sharddisconnect;
